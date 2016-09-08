@@ -1,15 +1,18 @@
 package ua.nure.ipz.zoo.model;
 
-import ua.nure.ipz.zoo.util.Entity;
+import ua.nure.ipz.zoo.util.DomainEntity;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Ration extends Entity {
+public class Ration extends DomainEntity {
 
     private Map<Product, Float> products = new HashMap<>();
     private Animal animal;
+
+    public Ration() {
+    }
 
     public Ration(Animal animal) {
         this.animal = animal;

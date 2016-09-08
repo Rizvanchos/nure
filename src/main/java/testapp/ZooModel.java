@@ -43,7 +43,7 @@ public class ZooModel {
         return products;
     }
 
-    public List<Ration> getRatitons() {
+    public List<Ration> getRations() {
         return rations;
     }
 

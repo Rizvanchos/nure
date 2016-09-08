@@ -1,15 +1,18 @@
 package ua.nure.ipz.zoo.model;
 
-import ua.nure.ipz.zoo.util.Entity;
+import ua.nure.ipz.zoo.util.DomainEntity;
 import ua.nure.ipz.zoo.util.Regex;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class Schedule extends Entity {
+public class Schedule extends DomainEntity {
 
     private Map<Aviary, String> schedule = new HashMap<>();
+
+    public Schedule() {
+    }
 
     public boolean add(Aviary aviary, String time) {
         if (aviary == null || !Pattern.matches(Regex.TIME_FORMAT, time)) {

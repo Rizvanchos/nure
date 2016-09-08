@@ -1,9 +1,9 @@
 package ua.nure.ipz.zoo.model;
 
 import ua.nure.ipz.zoo.model.enums.OrderStatus;
-import ua.nure.ipz.zoo.util.Entity;
+import ua.nure.ipz.zoo.util.DomainEntity;
 
-public class Order extends Entity {
+public class Order extends DomainEntity {
 
     private Cart cart;
     private Contact contact;
@@ -12,10 +12,34 @@ public class Order extends Entity {
     private Discount discount = new Discount();
     private Documentation logger = new Documentation();
 
+    public Order() {
+    }
+
     public Order(Cart cart, Contact contact) {
         this.cart = cart.checkout();
         this.basicPrice = cart.totalPrice();
         this.contact = contact;
+    }
+
+    public void process() {
+        if (status != OrderStatus.ACCEPTED) {
+            throw new IllegalStateException("Order must be accepted first!");
+        }
+        status = OrderStatus.PROCESSING;
+        logger.logOrder(this);
+    }
+
+    public void finish() {
+        if (status != OrderStatus.PROCESSING) {
+            throw new IllegalStateException("Order can be finished only if it was processing!");
+        }
+        status = OrderStatus.FINISHED;
+        logger.logOrder(this);
+    }
+
+    public void cancel() {
+        status = OrderStatus.CANCELLED;
+        logger.logOrder(this);
     }
 
     public Cart getCart() {
@@ -48,27 +72,6 @@ public class Order extends Entity {
 
     public void setDocumentation(Documentation logger) {
         this.logger = logger;
-    }
-
-    public void process() {
-        if (status != OrderStatus.ACCEPTED) {
-            throw new IllegalStateException("Order must be accepted first!");
-        }
-        status = OrderStatus.PROCESSING;
-        logger.logOrder(this);
-    }
-
-    public void finish() {
-        if (status != OrderStatus.PROCESSING) {
-            throw new IllegalStateException("Order can be finished only if it was processing!");
-        }
-        status = OrderStatus.FINISHED;
-        logger.logOrder(this);
-    }
-
-    public void cancel() {
-        status = OrderStatus.CANCELLED;
-        logger.logOrder(this);
     }
 
     @Override

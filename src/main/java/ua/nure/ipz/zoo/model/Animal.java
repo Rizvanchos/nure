@@ -1,11 +1,14 @@
 package ua.nure.ipz.zoo.model;
 
-import ua.nure.ipz.zoo.util.Entity;
+import ua.nure.ipz.zoo.util.DomainEntity;
 
-public class Animal extends Entity {
+public class Animal extends DomainEntity {
 
     private String name;
     private String type;
+
+    public Animal() {
+    }
 
     public Animal(String name, String type) {
         this.name = name;

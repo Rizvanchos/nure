@@ -1,6 +1,6 @@
 package ua.nure.ipz.zoo.model;
 
-import ua.nure.ipz.zoo.util.Entity;
+import ua.nure.ipz.zoo.util.DomainEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +10,12 @@ import java.util.Objects;
  * Keeps rations and generates product list to buy.
  */
 
-public class Provision extends Entity {
+public class Provision extends DomainEntity {
 
     private List<Ration> provisionList = new ArrayList<>();
     private Documentation logger = new Documentation();
 
-    public void setDocumentation(Documentation logger) {
-        this.logger = logger;
+    public Provision() {
     }
 
     public boolean add(Ration ration) {
@@ -29,6 +28,10 @@ public class Provision extends Entity {
         provisionList.forEach(r -> sb.append(r + "\n"));
         logger.logProvision(this);
         return sb.toString();
+    }
+
+    public void setDocumentation(Documentation logger) {
+        this.logger = logger;
     }
 
     @Override

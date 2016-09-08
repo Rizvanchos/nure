@@ -17,7 +17,7 @@ public class ModelReporter {
         reportCollection("Aviaries", model.getAviaries());
         reportCollection("Carts", model.getCarts());
         reportCollection("Orders", model.getOrders());
-        reportCollection("Rations", model.getRatitons());
+        reportCollection("Rations", model.getRations());
         reportCollection("Provisions", model.getProvisions());
         reportCollection("Schedules", model.getSchedules());
         reportCollection("Tickets", model.getTickets());

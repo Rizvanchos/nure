@@ -14,6 +14,19 @@ public class Discount {
         this.coefficient = 0.7f;
     }
 
+    public float getDiscountedPrice(Cart cart) {
+        int amount = cart.getOrderedTickets().entrySet()
+                .stream()
+                .filter(e -> e.getKey().getType() == type)
+                .mapToInt(e -> e.getValue())
+                .sum();
+        float discounted = cart.totalPrice();
+        if (amount >= barrier) {
+            discounted = discounted * coefficient;
+        }
+        return discounted;
+    }
+
     public TicketType getType() {
         return type;
     }
@@ -36,20 +49,6 @@ public class Discount {
 
     public void setCoefficient(float coefficient) {
         this.coefficient = coefficient;
-    }
-
-    public float getDiscountedPrice(Cart cart) {
-        int amount = cart.getOrderedTickets().entrySet()
-                .stream()
-                .filter(e -> e.getKey().getType() == type)
-                .mapToInt(e -> e.getValue())
-                .sum();
-
-        float discounted = cart.totalPrice();
-        if (amount >= barrier) {
-            discounted = discounted * coefficient;
-        }
-        return discounted;
     }
 
     @Override

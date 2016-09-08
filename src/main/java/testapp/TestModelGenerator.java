@@ -103,17 +103,17 @@ public class TestModelGenerator {
         third.addProduct(m.getProducts().get(0), 10);
         third.addProduct(m.getProducts().get(2), 4.7f);
 
-        m.getRatitons().add(first);
-        m.getRatitons().add(second);
-        m.getRatitons().add(third);
+        m.getRations().add(first);
+        m.getRations().add(second);
+        m.getRations().add(third);
     }
 
     private static void generateProvisions(ZooModel m) {
         Provision provision = new Provision();
         provision.setDocumentation(m.getDocumentations().get(0));
-        provision.add(m.getRatitons().get(0));
-        provision.add(m.getRatitons().get(1));
-        provision.add(m.getRatitons().get(2));
+        provision.add(m.getRations().get(0));
+        provision.add(m.getRations().get(1));
+        provision.add(m.getRations().get(2));
 
         provision.productsToBuy();
 

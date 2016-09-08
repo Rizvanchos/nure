@@ -12,10 +12,6 @@ public class TicketSaller extends Account {
         super(name, email, password);
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
     public void addOrder(Order order) {
         Objects.requireNonNull(order, "Order can't be null!");
         orders.add(order);
@@ -32,6 +28,10 @@ public class TicketSaller extends Account {
 
     private void finishSendMail(Order order) {
         order.finish();
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override

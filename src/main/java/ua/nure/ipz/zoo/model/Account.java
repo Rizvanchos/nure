@@ -1,15 +1,18 @@
 package ua.nure.ipz.zoo.model;
 
-import ua.nure.ipz.zoo.util.Entity;
+import ua.nure.ipz.zoo.util.DomainEntity;
 import ua.nure.ipz.zoo.util.Regex;
 
 import java.util.regex.Pattern;
 
-public class Account extends Entity {
+public class Account extends DomainEntity {
 
     private String name;
     private String email;
     private String password;
+
+    public Account() {
+    }
 
     public Account(String name, String email, String password) {
         setName(name);

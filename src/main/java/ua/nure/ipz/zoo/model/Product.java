@@ -1,11 +1,19 @@
 package ua.nure.ipz.zoo.model;
 
-import ua.nure.ipz.zoo.util.Entity;
+import ua.nure.ipz.zoo.util.DomainEntity;
 
-public class Product extends Entity {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "products")
+public class Product extends DomainEntity {
 
     private String name;
     private float price;
+
+    public Product() {
+    }
 
     public Product(String name, float price) {
         this.name = name;
@@ -14,6 +22,10 @@ public class Product extends Entity {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public float getPrice() {

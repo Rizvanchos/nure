@@ -1,11 +1,19 @@
 package ua.nure.ipz.zoo.model;
 
 import ua.nure.ipz.zoo.model.enums.TicketType;
-import ua.nure.ipz.zoo.util.Entity;
+import ua.nure.ipz.zoo.util.DomainEntity;
 
-public class Ticket extends Entity {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tickets")
+public class Ticket extends DomainEntity {
 
     private TicketType type;
+
+    public Ticket() {
+    }
 
     public Ticket(TicketType type) {
         this.type = type;

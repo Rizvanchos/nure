@@ -1,20 +1,43 @@
 package ua.nure.ipz.zoo.model;
 
-import ua.nure.ipz.zoo.util.Entity;
+import ua.nure.ipz.zoo.util.DomainEntity;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Aviary extends Entity {
+public class Aviary extends DomainEntity {
 
     private Set<Animal> animals = new HashSet<>();
     private float temperature;
     private float wet;
     private boolean contactFlag;
 
+    public Aviary() {
+    }
+
     public Aviary(float temperature, float wet) {
         this.temperature = temperature;
         this.wet = wet;
+    }
+
+    public boolean isContact() {
+        return contactFlag;
+    }
+
+    public boolean isEmpty() {
+        return animals.size() == 0;
+    }
+
+    public boolean addAnimal(Animal a) {
+        return animals.add(a);
+    }
+
+    public boolean contains(Animal a) {
+        return animals.contains(a);
+    }
+
+    public boolean removeAnimal(Animal a) {
+        return animals.remove(a);
     }
 
     public Set<Animal> getAnimals() {
@@ -29,10 +52,6 @@ public class Aviary extends Entity {
         return wet;
     }
 
-    public boolean isContact() {
-        return contactFlag;
-    }
-
     public void setTemperature(float temperature) {
         this.temperature = temperature;
     }
@@ -43,22 +62,6 @@ public class Aviary extends Entity {
 
     public void setContact(boolean contactFlag) {
         this.contactFlag = contactFlag;
-    }
-
-    public boolean addAnimal(Animal a) {
-        return animals.add(a);
-    }
-
-    public boolean removeAnimal(Animal a) {
-        return animals.remove(a);
-    }
-
-    public boolean contains(Animal a) {
-        return animals.contains(a);
-    }
-
-    public boolean isEmpty() {
-        return animals.size() == 0;
     }
 
     @Override
