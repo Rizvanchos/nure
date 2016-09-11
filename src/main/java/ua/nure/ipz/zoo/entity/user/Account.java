@@ -1,10 +1,12 @@
-package ua.nure.ipz.zoo.model;
+package ua.nure.ipz.zoo.entity.user;
 
 import ua.nure.ipz.zoo.util.DomainEntity;
 import ua.nure.ipz.zoo.util.Regex;
 
 import java.util.regex.Pattern;
 
+//@Entity
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class Account extends DomainEntity {
 
     private String name;
@@ -44,7 +46,7 @@ public class Account extends DomainEntity {
 
     public void setEmail(String email) {
         checkInput(email);
-        if (!Pattern.matches(Regex.MAIL_FORMAT, email)) {
+        if (!Pattern.matches(Regex.EMAIL_FORMAT, email)) {
             throw new IllegalArgumentException("Invalid mail format: " + email);
         }
         this.email = email;

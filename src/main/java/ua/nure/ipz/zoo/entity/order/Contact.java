@@ -1,8 +1,14 @@
-package ua.nure.ipz.zoo.model;
+package ua.nure.ipz.zoo.entity.order;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Contact {
 
     private String email;
+
+    public Contact() {
+    }
 
     public Contact(String email) {
         this.email = email;

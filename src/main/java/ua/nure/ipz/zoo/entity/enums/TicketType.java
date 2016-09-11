@@ -1,4 +1,4 @@
-package ua.nure.ipz.zoo.model.enums;
+package ua.nure.ipz.zoo.entity.enums;
 
 public enum TicketType {
     CHILD(10), SCHOOL(10), STUDENT(15), STANDARD(30);

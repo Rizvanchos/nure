@@ -1,12 +1,8 @@
-package ua.nure.ipz.zoo.model;
+package ua.nure.ipz.zoo.entity;
 
 import ua.nure.ipz.zoo.util.DomainEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "products")
+//@Entity
 public class Product extends DomainEntity {
 
     private String name;

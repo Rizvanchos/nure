@@ -1,16 +1,24 @@
-package ua.nure.ipz.zoo.model;
+package ua.nure.ipz.zoo.entity.order;
 
-import ua.nure.ipz.zoo.model.enums.OrderStatus;
+import ua.nure.ipz.zoo.entity.ticket.Discount;
+import ua.nure.ipz.zoo.entity.enums.OrderStatus;
+import ua.nure.ipz.zoo.entity.log.order.OrderLog;
+import ua.nure.ipz.zoo.entity.user.Cart;
 import ua.nure.ipz.zoo.util.DomainEntity;
 
+import javax.persistence.Embedded;
+
+//@Entity
 public class Order extends DomainEntity {
 
     private Cart cart;
     private Contact contact;
     private float basicPrice;
-    private OrderStatus status = OrderStatus.ACCEPTED;
-    private Discount discount = new Discount();
-    private Documentation logger = new Documentation();
+    private OrderLog logger;
+    private OrderStatus status;
+
+    @Embedded
+    private Discount discount;
 
     public Order() {
     }
@@ -19,6 +27,7 @@ public class Order extends DomainEntity {
         this.cart = cart.checkout();
         this.basicPrice = cart.totalPrice();
         this.contact = contact;
+        this.status = OrderStatus.ACCEPTED;
     }
 
     public void process() {
@@ -26,7 +35,7 @@ public class Order extends DomainEntity {
             throw new IllegalStateException("Order must be accepted first!");
         }
         status = OrderStatus.PROCESSING;
-        logger.logOrder(this);
+        logger.log(this);
     }
 
     public void finish() {
@@ -34,12 +43,12 @@ public class Order extends DomainEntity {
             throw new IllegalStateException("Order can be finished only if it was processing!");
         }
         status = OrderStatus.FINISHED;
-        logger.logOrder(this);
+        logger.log(this);
     }
 
     public void cancel() {
         status = OrderStatus.CANCELLED;
-        logger.logOrder(this);
+        logger.log(this);
     }
 
     public Cart getCart() {
@@ -55,22 +64,29 @@ public class Order extends DomainEntity {
     }
 
     public float getTotalPrice() {
-        return discount.getDiscountedPrice(cart);
+        if (discount != null) {
+            return discount.discountPrice(cart);
+        }
+        return basicPrice;
     }
 
     public Discount getDiscount() {
         return discount;
     }
 
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
+    }
+
     public OrderStatus getStatus() {
         return status;
     }
 
-    public void setDiscount(Discount dictount) {
-        this.discount = dictount;
+    public OrderLog getLogger() {
+        return logger;
     }
 
-    public void setDocumentation(Documentation logger) {
+    public void setLogger(OrderLog logger) {
         this.logger = logger;
     }
 

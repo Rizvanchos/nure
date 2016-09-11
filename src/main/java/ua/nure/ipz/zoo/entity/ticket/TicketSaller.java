@@ -1,20 +1,23 @@
-package ua.nure.ipz.zoo.model;
+package ua.nure.ipz.zoo.entity.ticket;
 
+import ua.nure.ipz.zoo.entity.user.Account;
+import ua.nure.ipz.zoo.entity.order.Order;
+
+import javax.persistence.ElementCollection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+//@Entity
 public class TicketSaller extends Account {
 
+    @ElementCollection
     private List<Order> orders = new ArrayList<>();
+
+    public TicketSaller() {
+    }
 
     public TicketSaller(String name, String email, String password) {
         super(name, email, password);
-    }
-
-    public void addOrder(Order order) {
-        Objects.requireNonNull(order, "Order can't be null!");
-        orders.add(order);
     }
 
     public void sendMailTickets(Order order) {
@@ -32,6 +35,10 @@ public class TicketSaller extends Account {
 
     public List<Order> getOrders() {
         return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override

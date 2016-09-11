@@ -1,7 +1,8 @@
-package ua.nure.ipz.zoo.model;
+package ua.nure.ipz.zoo.entity;
 
 import ua.nure.ipz.zoo.util.DomainEntity;
 
+//@Entity
 public class Animal extends DomainEntity {
 
     private String name;

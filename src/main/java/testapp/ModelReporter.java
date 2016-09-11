@@ -21,7 +21,8 @@ public class ModelReporter {
         reportCollection("Provisions", model.getProvisions());
         reportCollection("Schedules", model.getSchedules());
         reportCollection("Tickets", model.getTickets());
-        reportCollection("Documentations", model.getDocumentations());
+        reportCollection("Order logs", model.getOrderLogs());
+        reportCollection("Provision logs", model.getProvisionLogs());
     }
 
     private <T> void reportCollection(String title, List<T> items) {

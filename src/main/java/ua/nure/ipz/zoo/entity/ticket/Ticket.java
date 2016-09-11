@@ -1,15 +1,15 @@
-package ua.nure.ipz.zoo.model;
+package ua.nure.ipz.zoo.entity.ticket;
 
-import ua.nure.ipz.zoo.model.enums.TicketType;
+import ua.nure.ipz.zoo.entity.enums.TicketType;
 import ua.nure.ipz.zoo.util.DomainEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Enumerated;
 
 @Entity
-@Table(name = "tickets")
 public class Ticket extends DomainEntity {
 
+    @Enumerated
     private TicketType type;
 
     public Ticket() {
@@ -21,6 +21,10 @@ public class Ticket extends DomainEntity {
 
     public TicketType getType() {
         return type;
+    }
+
+    public void setType(TicketType type) {
+        this.type = type;
     }
 
     public float getPrice() {

@@ -13,7 +13,7 @@ import java.util.UUID;
 public abstract class DomainEntity implements Serializable {
     @Id
     @GeneratedValue
-    private long databaseId;
+    private Integer id;
 
     @Type(type = "uuid-binary")
     @Column(length = 32, unique = true, nullable = false)
@@ -33,15 +33,19 @@ public abstract class DomainEntity implements Serializable {
         return domainId.hashCode();
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public UUID getDomainId() {
         return domainId;
     }
 
-    public long getDatabaseId() {
-        return databaseId;
-    }
-
-    public void setDatabaseId(long databaseId) {
-        this.databaseId = databaseId;
+    public void setDomainId(UUID domainId) {
+        this.domainId = domainId;
     }
 }

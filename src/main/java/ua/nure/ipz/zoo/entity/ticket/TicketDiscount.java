@@ -1,24 +1,31 @@
-package ua.nure.ipz.zoo.model;
+package ua.nure.ipz.zoo.entity.ticket;
 
-import ua.nure.ipz.zoo.model.enums.TicketType;
+import ua.nure.ipz.zoo.entity.user.Cart;
+import ua.nure.ipz.zoo.entity.enums.TicketType;
 
-public class Discount {
+public class TicketDiscount extends Discount {
 
     private TicketType type;
     private int barrier;
     private float coefficient;
 
-    public Discount() {
+    public TicketDiscount() {
         this.type = TicketType.STANDARD;
         this.barrier = 10;
         this.coefficient = 0.7f;
     }
 
-    public float getDiscountedPrice(Cart cart) {
-        int amount = cart.getOrderedTickets().entrySet()
+    public TicketDiscount(TicketType type, int barrier, float coefficient) {
+        this.type = type;
+        this.barrier = barrier;
+        this.coefficient = coefficient;
+    }
+
+    public float discountPrice(Cart cart) {
+        int amount = cart.getCartEntries()
                 .stream()
-                .filter(e -> e.getKey().getType() == type)
-                .mapToInt(e -> e.getValue())
+                .filter(cartEntry -> cartEntry.getTicket().getType() == type)
+                .mapToInt(cartEntry -> cartEntry.getQuantity())
                 .sum();
         float discounted = cart.totalPrice();
         if (amount >= barrier) {
