@@ -2,14 +2,16 @@ package ua.nure.ipz.zoo.entity;
 
 import ua.nure.ipz.zoo.util.DomainEntity;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
-//@Entity
+@Entity
 public class Aviary extends DomainEntity {
 
-    @ElementCollection
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "aviary")
     private Set<Animal> animals = new HashSet<>();
     private boolean contactFlag;
     private float temperature;
@@ -23,20 +25,20 @@ public class Aviary extends DomainEntity {
         this.wet = wet;
     }
 
-    public boolean isContact() {
-        return contactFlag;
-    }
-
-    public void setContact(boolean contactFlag) {
-        this.contactFlag = contactFlag;
-    }
-
     public Set<Animal> getAnimals() {
         return animals;
     }
 
     public void setAnimals(Set<Animal> animals) {
         this.animals = animals;
+    }
+
+    public boolean isContact() {
+        return contactFlag;
+    }
+
+    public void setContact(boolean contactFlag) {
+        this.contactFlag = contactFlag;
     }
 
     public float getTemperature() {
@@ -57,8 +59,8 @@ public class Aviary extends DomainEntity {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("ID = " + getDomainId() + "\nTemperature = " + getTemperature() + "\nWet = "
-                + getWet() + "\nContact = " + isContact() + "\n\nAnimals:\n");
+        StringBuilder sb = new StringBuilder(super.toString() + "\nTemperature = " + temperature + "\nWet = "
+                + wet+ "\nContact = " + contactFlag + "\n\nAnimals:\n");
         animals.forEach(a -> sb.append("\n" + a + "\n"));
         return sb.toString();
     }

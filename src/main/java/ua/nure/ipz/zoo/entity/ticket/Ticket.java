@@ -33,6 +33,6 @@ public class Ticket extends DomainEntity {
 
     @Override
     public String toString() {
-        return String.format("TicketType = %s\n", getType());
+        return String.format("%s\nTicketType = %s\n", super.toString(), getType());
     }
 }

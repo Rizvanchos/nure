@@ -1,24 +1,46 @@
 package ua.nure.ipz.zoo.entity.order;
 
-import ua.nure.ipz.zoo.entity.ticket.Discount;
 import ua.nure.ipz.zoo.entity.enums.OrderStatus;
 import ua.nure.ipz.zoo.entity.log.order.OrderLog;
+import ua.nure.ipz.zoo.entity.log.order.OrderLogger;
+import ua.nure.ipz.zoo.entity.ticket.Discount;
+import ua.nure.ipz.zoo.entity.ticket.TicketSaller;
+import ua.nure.ipz.zoo.entity.user.Account;
 import ua.nure.ipz.zoo.entity.user.Cart;
 import ua.nure.ipz.zoo.util.DomainEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-//@Entity
+@Entity
+@Table(name = "Orders")
 public class Order extends DomainEntity {
 
-    private Cart cart;
-    private Contact contact;
-    private float basicPrice;
+    @ManyToOne(cascade = CascadeType.PERSIST, targetEntity = TicketSaller.class)
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @OneToOne(cascade = CascadeType.PERSIST, targetEntity = OrderLogger.class)
     private OrderLog logger;
+
+    @Enumerated
     private OrderStatus status;
 
     @Embedded
     private Discount discount;
+    @Embedded
+    private Contact contact;
+
+    @OneToOne
+    private Cart cart;
+
+    private float basicPrice;
 
     public Order() {
     }
@@ -28,6 +50,10 @@ public class Order extends DomainEntity {
         this.basicPrice = cart.totalPrice();
         this.contact = contact;
         this.status = OrderStatus.ACCEPTED;
+    }
+
+    public float getTotalPrice() {
+        return discount != null ? discount.discountPrice(cart) : basicPrice;
     }
 
     public void process() {
@@ -63,11 +89,12 @@ public class Order extends DomainEntity {
         return basicPrice;
     }
 
-    public float getTotalPrice() {
-        if (discount != null) {
-            return discount.discountPrice(cart);
-        }
-        return basicPrice;
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Discount getDiscount() {
@@ -92,7 +119,7 @@ public class Order extends DomainEntity {
 
     @Override
     public String toString() {
-        return String.format("Cart = %s\nBasic Price = %s\nDiscounted Price = %s\n" + "Contact = %s\nStatus = %s",
-                getCart(), getBasicPrice(), getTotalPrice(), getContact(), getStatus());
+        return String.format("%s\nCart = %s\nBasic Price = %s\nDiscounted Price = %s\n" + "Contact = %s\nStatus = %s",
+                super.toString(), cart, basicPrice, getTotalPrice(), contact, status);
     }
 }

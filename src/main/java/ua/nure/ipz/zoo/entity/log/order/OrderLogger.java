@@ -2,19 +2,22 @@ package ua.nure.ipz.zoo.entity.log.order;
 
 import ua.nure.ipz.zoo.entity.order.Order;
 
-//@Entity
-public class OrderLogger extends OrderLog {
+import javax.persistence.Entity;
+import javax.persistence.Lob;
 
-    private StringBuilder stringBuilder = new StringBuilder();
+@Entity
+public class OrderLogger extends OrderLog {
+    @Lob
+    private String log;
 
     @Override
     public void log(Order target) {
-        stringBuilder.append(target + "\n");
+        log += target + "\n";
     }
 
     @Override
     public String getLog() {
-        return stringBuilder.toString();
+        return log;
     }
 
     @Override

@@ -3,11 +3,14 @@ package ua.nure.ipz.zoo.entity.user;
 import ua.nure.ipz.zoo.util.DomainEntity;
 import ua.nure.ipz.zoo.util.Regex;
 
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import java.util.regex.Pattern;
 
-//@Entity
-//@Inheritance(strategy = InheritanceType.JOINED)
-public class Account extends DomainEntity {
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Account extends DomainEntity {
 
     private String name;
     private String email;
@@ -60,7 +63,6 @@ public class Account extends DomainEntity {
 
     @Override
     public String toString() {
-        return String.format("ID = %s\nName = %s\nEmail = %s\nPassword = %s", getDomainId(), getName(), getEmail(),
-                getPassword());
+        return String.format("%s\nName = %s\nEmail = %s\nPassword = %s", super.toString(), name, email, password);
     }
 }

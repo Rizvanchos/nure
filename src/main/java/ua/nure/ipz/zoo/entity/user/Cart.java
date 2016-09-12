@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Cart extends DomainEntity {
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "cart")
     private List<CartEntry> cartEntries = new ArrayList<>();
 
     public Cart() {

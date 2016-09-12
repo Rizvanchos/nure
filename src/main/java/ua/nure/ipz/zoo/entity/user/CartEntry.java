@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class CartEntry extends DomainEntity {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
@@ -54,6 +54,6 @@ public class CartEntry extends DomainEntity {
 
     @Override
     public String toString() {
-        return String.format("Ticket = %s\nQuantity = ", ticket, quantity);
+        return String.format("%s\nTicket = %s\nQuantity = ", super.toString(), ticket, quantity);
     }
 }

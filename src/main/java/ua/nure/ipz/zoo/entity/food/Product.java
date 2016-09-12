@@ -1,9 +1,18 @@
-package ua.nure.ipz.zoo.entity;
+package ua.nure.ipz.zoo.entity.food;
 
 import ua.nure.ipz.zoo.util.DomainEntity;
 
-//@Entity
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Product extends DomainEntity {
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ration_id")
+    private Ration ration;
 
     private String name;
     private float price;
@@ -32,8 +41,16 @@ public class Product extends DomainEntity {
         this.price = price;
     }
 
+    public Ration getRation() {
+        return ration;
+    }
+
+    public void setRation(Ration ration) {
+        this.ration = ration;
+    }
+
     @Override
     public String toString() {
-        return String.format("ID = %s\nName = %s\nPrice = %s", getDomainId(), getName(), getPrice());
+        return String.format("%s\nName = %s\nPrice = %s", super.toString(), name, price);
     }
 }

@@ -19,6 +19,6 @@ public enum TicketType {
 
     @Override
     public String toString() {
-        return super.toString() + ", Price = " + getPrice();
+        return super.toString() + ", Price = " + price;
     }
 }

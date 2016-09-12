@@ -20,17 +20,17 @@ public abstract class DomainEntity implements Serializable {
     private UUID domainId = UUID.randomUUID();
 
     @Override
+    public int hashCode() {
+        return domainId.hashCode();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o.getClass() != this.getClass()) {
             return false;
         }
         DomainEntity otherDomainEntity = (DomainEntity) o;
         return domainId.equals(otherDomainEntity.getDomainId());
-    }
-
-    @Override
-    public int hashCode() {
-        return domainId.hashCode();
     }
 
     public Integer getId() {
@@ -47,5 +47,10 @@ public abstract class DomainEntity implements Serializable {
 
     public void setDomainId(UUID domainId) {
         this.domainId = domainId;
+    }
+
+    @Override
+    public String toString() {
+        return "ID = " + domainId;
     }
 }

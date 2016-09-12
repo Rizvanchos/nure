@@ -1,8 +1,11 @@
 package ua.nure.ipz.zoo.entity.ticket;
 
-import ua.nure.ipz.zoo.entity.user.Cart;
 import ua.nure.ipz.zoo.entity.enums.TicketType;
+import ua.nure.ipz.zoo.entity.user.Cart;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class TicketDiscount extends Discount {
 
     private TicketType type;
@@ -60,7 +63,6 @@ public class TicketDiscount extends Discount {
 
     @Override
     public String toString() {
-        return String.format("TicketType = %s\nBarrier = %s\nCoefficient = %s", getType(), getBarrier(),
-                getCoefficient());
+        return String.format("%s\nTicketType = %s\nBarrier = %s\nCoefficient = %s", super.toString(), type, barrier, coefficient);
     }
 }

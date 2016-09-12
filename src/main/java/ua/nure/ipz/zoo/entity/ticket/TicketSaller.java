@@ -1,16 +1,18 @@
 package ua.nure.ipz.zoo.entity.ticket;
 
-import ua.nure.ipz.zoo.entity.user.Account;
 import ua.nure.ipz.zoo.entity.order.Order;
+import ua.nure.ipz.zoo.entity.user.Account;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Entity
+@Entity
 public class TicketSaller extends Account {
 
-    @ElementCollection
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "account")
     private List<Order> orders = new ArrayList<>();
 
     public TicketSaller() {
@@ -21,15 +23,7 @@ public class TicketSaller extends Account {
     }
 
     public void sendMailTickets(Order order) {
-        startSendMail(order);
-        finishSendMail(order);
-    }
-
-    private void startSendMail(Order order) {
         order.process();
-    }
-
-    private void finishSendMail(Order order) {
         order.finish();
     }
 

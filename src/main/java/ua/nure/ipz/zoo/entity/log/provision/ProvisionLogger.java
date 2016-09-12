@@ -1,20 +1,23 @@
 package ua.nure.ipz.zoo.entity.log.provision;
 
-import ua.nure.ipz.zoo.entity.Provision;
+import ua.nure.ipz.zoo.entity.food.Provision;
 
-//@Entity
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+
+@Entity
 public class ProvisionLogger extends ProvisionLog {
-
-    private StringBuilder stringBuilder = new StringBuilder();
+    @Lob
+    private String log;
 
     @Override
     public void log(Provision target) {
-        stringBuilder.append(target + "\n");
+        log += target + "\n";
     }
 
     @Override
     public String getLog() {
-        return stringBuilder.toString();
+        return log;
     }
 
     @Override
