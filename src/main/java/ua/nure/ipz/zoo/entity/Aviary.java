@@ -5,14 +5,14 @@ import ua.nure.ipz.zoo.util.DomainEntity;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Aviary extends DomainEntity {
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "aviary")
-    private Set<Animal> animals = new HashSet<>();
+    private List<Animal> animals = new ArrayList<>();
     private boolean contactFlag;
     private float temperature;
     private float wet;
@@ -25,11 +25,11 @@ public class Aviary extends DomainEntity {
         this.wet = wet;
     }
 
-    public Set<Animal> getAnimals() {
+    public List<Animal> getAnimals() {
         return animals;
     }
 
-    public void setAnimals(Set<Animal> animals) {
+    public void setAnimals(List<Animal> animals) {
         this.animals = animals;
     }
 
@@ -60,7 +60,7 @@ public class Aviary extends DomainEntity {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(super.toString() + "\nTemperature = " + temperature + "\nWet = "
-                + wet+ "\nContact = " + contactFlag + "\n\nAnimals:\n");
+                + wet + "\nContact = " + contactFlag + "\n\nAnimals:\n");
         animals.forEach(a -> sb.append("\n" + a + "\n"));
         return sb.toString();
     }

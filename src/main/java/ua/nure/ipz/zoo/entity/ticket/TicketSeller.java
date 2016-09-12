@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class TicketSaller extends Account {
+public class TicketSeller extends Account {
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "account")
     private List<Order> orders = new ArrayList<>();
 
-    public TicketSaller() {
+    public TicketSeller() {
     }
 
-    public TicketSaller(String name, String email, String password) {
+    public TicketSeller(String name, String email, String password) {
         super(name, email, password);
     }
 

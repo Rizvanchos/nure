@@ -4,14 +4,14 @@ import ua.nure.ipz.zoo.util.DomainEntity;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Entity
 public class Schedule extends DomainEntity {
 
     @ElementCollection
-    private Map<Aviary, String> schedules = new HashMap<>();
+    private Map<Aviary, String> schedules = new LinkedHashMap<>();
 
     public String generateSchedule() {
         StringBuilder sb = new StringBuilder();

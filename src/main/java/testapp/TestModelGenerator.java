@@ -7,16 +7,14 @@ import ua.nure.ipz.zoo.entity.enums.TicketType;
 import ua.nure.ipz.zoo.entity.food.Product;
 import ua.nure.ipz.zoo.entity.food.Provision;
 import ua.nure.ipz.zoo.entity.food.Ration;
-import ua.nure.ipz.zoo.entity.food.RationEntry;
 import ua.nure.ipz.zoo.entity.log.order.OrderLogger;
 import ua.nure.ipz.zoo.entity.log.provision.ProvisionLogger;
 import ua.nure.ipz.zoo.entity.order.Contact;
 import ua.nure.ipz.zoo.entity.order.Order;
 import ua.nure.ipz.zoo.entity.ticket.Ticket;
 import ua.nure.ipz.zoo.entity.ticket.TicketDiscount;
-import ua.nure.ipz.zoo.entity.ticket.TicketSaller;
+import ua.nure.ipz.zoo.entity.ticket.TicketSeller;
 import ua.nure.ipz.zoo.entity.user.Cart;
-import ua.nure.ipz.zoo.entity.user.CartEntry;
 
 public class TestModelGenerator {
 
@@ -27,14 +25,12 @@ public class TestModelGenerator {
         generateAviaries(zoo);
         generateSchedules(zoo);
         generateTickets(zoo);
-        generateCartEntries(zoo);
         generateCarts(zoo);
         generateLogs(zoo);
         generateDiscounts(zoo);
         generateOrders(zoo);
         generateAccounts(zoo);
         generateProducts(zoo);
-        generateRationEntries(zoo);
         generateRations(zoo);
         generateProvisions(zoo);
 
@@ -78,24 +74,12 @@ public class TestModelGenerator {
         zoo.getTickets().add(new Ticket(TicketType.STANDARD));
     }
 
-    private static void generateCartEntries(ZooModel zoo) {
-        zoo.getCartEntries().add(new CartEntry(zoo.getTickets().get(0), 10));
-        zoo.getCartEntries().add(new CartEntry(zoo.getTickets().get(1), 5));
-        zoo.getCartEntries().add(new CartEntry(zoo.getTickets().get(2), 3));
-        zoo.getCartEntries().add(new CartEntry(zoo.getTickets().get(3), 1));
-    }
-
     private static void generateCarts(ZooModel zoo) {
         Cart cart = new Cart();
-        cart.getCartEntries().add(zoo.getCartEntries().get(0));
-        cart.getCartEntries().add(zoo.getCartEntries().get(1));
-        cart.getCartEntries().add(zoo.getCartEntries().get(2));
-        cart.getCartEntries().add(zoo.getCartEntries().get(3));
-
-        zoo.getCartEntries().get(0).setCart(cart);
-        zoo.getCartEntries().get(1).setCart(cart);
-        zoo.getCartEntries().get(2).setCart(cart);
-        zoo.getCartEntries().get(3).setCart(cart);
+        cart.getOrderedTickets().put(zoo.getTickets().get(0), 10);
+        cart.getOrderedTickets().put(zoo.getTickets().get(1), 5);
+        cart.getOrderedTickets().put(zoo.getTickets().get(2), 3);
+        cart.getOrderedTickets().put(zoo.getTickets().get(3), 1);
 
         zoo.getCarts().add(cart);
     }
@@ -119,11 +103,10 @@ public class TestModelGenerator {
     }
 
     private static void generateAccounts(ZooModel zoo) {
-        TicketSaller john = new TicketSaller("Lavretiy", "lavretiy@mail.ru", "abcde");
+        TicketSeller john = new TicketSeller("Lavretiy", "lavretiy@mail.ru", "abcde");
         john.getOrders().add(zoo.getOrders().get(0));
 
         zoo.getOrders().get(0).setAccount(john);
-
         zoo.getAccounts().add(john);
     }
 
@@ -133,35 +116,17 @@ public class TestModelGenerator {
         zoo.getProducts().add(new Product("banana", 2.0f));
     }
 
-    private static void generateRationEntries(ZooModel zoo) {
-        zoo.getRationEntries().add(new RationEntry(zoo.getProducts().get(0), 5f));
-        zoo.getRationEntries().add(new RationEntry(zoo.getProducts().get(1), 1f));
-        zoo.getRationEntries().add(new RationEntry(zoo.getProducts().get(2), 3f));
-        zoo.getRationEntries().add(new RationEntry(zoo.getProducts().get(0), 10f));
-        zoo.getRationEntries().add(new RationEntry(zoo.getProducts().get(2), 4.7f));
-    }
-
     private static void generateRations(ZooModel zoo) {
         Ration first = new Ration(zoo.getAnimals().get(0));
-        first.getRationEntries().add(zoo.getRationEntries().get(0));
+        first.getRationEntries().put(zoo.getProducts().get(0), 5f);
 
         Ration second = new Ration(zoo.getAnimals().get(1));
-        second.getRationEntries().add(zoo.getRationEntries().get(1));
-        second.getRationEntries().add(zoo.getRationEntries().get(2));
+        second.getRationEntries().put(zoo.getProducts().get(1), 1f);
+        second.getRationEntries().put(zoo.getProducts().get(2), 3f);
 
         Ration third = new Ration(zoo.getAnimals().get(2));
-        third.getRationEntries().add(zoo.getRationEntries().get(3));
-        third.getRationEntries().add(zoo.getRationEntries().get(4));
-
-        zoo.getProducts().get(0).setRation(first);
-        zoo.getProducts().get(1).setRation(second);
-        zoo.getProducts().get(2).setRation(third);
-
-        zoo.getRationEntries().get(0).setRation(first);
-        zoo.getRationEntries().get(1).setRation(second);
-        zoo.getRationEntries().get(2).setRation(second);
-        zoo.getRationEntries().get(3).setRation(third);
-        zoo.getRationEntries().get(4).setRation(third);
+        third.getRationEntries().put(zoo.getProducts().get(0), 10f);
+        third.getRationEntries().put(zoo.getProducts().get(2), 4.7f);
 
         zoo.getRations().add(first);
         zoo.getRations().add(second);
@@ -174,10 +139,6 @@ public class TestModelGenerator {
         provision.getRations().add(zoo.getRations().get(0));
         provision.getRations().add(zoo.getRations().get(1));
         provision.getRations().add(zoo.getRations().get(2));
-
-        zoo.getRations().get(0).setProvision(provision);
-        zoo.getRations().get(1).setProvision(provision);
-        zoo.getRations().get(2).setProvision(provision);
 
         provision.productsToBuy();
 

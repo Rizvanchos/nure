@@ -5,8 +5,8 @@ import ua.nure.ipz.zoo.entity.log.provision.ProvisionLogger;
 import ua.nure.ipz.zoo.util.DomainEntity;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 public class Provision extends DomainEntity {
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "provision")
+    @ElementCollection
     private List<Ration> rations = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.PERSIST, targetEntity = ProvisionLogger.class)

@@ -8,7 +8,6 @@ import javax.persistence.Enumerated;
 
 @Entity
 public class Ticket extends DomainEntity {
-
     @Enumerated
     private TicketType type;
 

@@ -25,10 +25,10 @@ public class TicketDiscount extends Discount {
     }
 
     public float discountPrice(Cart cart) {
-        int amount = cart.getCartEntries()
+        int amount = cart.getOrderedTickets().entrySet()
                 .stream()
-                .filter(cartEntry -> cartEntry.getTicket().getType() == type)
-                .mapToInt(cartEntry -> cartEntry.getQuantity())
+                .filter(e -> e.getKey().getType() == type)
+                .mapToInt(e -> e.getValue())
                 .sum();
         float discounted = cart.totalPrice();
         if (amount >= barrier) {

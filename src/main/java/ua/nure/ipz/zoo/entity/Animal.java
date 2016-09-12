@@ -24,6 +24,14 @@ public class Animal extends DomainEntity {
         this.type = type;
     }
 
+    public Aviary getAviary() {
+        return aviary;
+    }
+
+    public void setAviary(Aviary aviary) {
+        this.aviary = aviary;
+    }
+
     public String getName() {
         return name;
     }
@@ -38,14 +46,6 @@ public class Animal extends DomainEntity {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Aviary getAviary() {
-        return aviary;
-    }
-
-    public void setAviary(Aviary aviary) {
-        this.aviary = aviary;
     }
 
     @Override

@@ -1,52 +1,49 @@
 package ua.nure.ipz.zoo.entity.user;
 
+import ua.nure.ipz.zoo.entity.ticket.Ticket;
 import ua.nure.ipz.zoo.util.DomainEntity;
 
-import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 public class Cart extends DomainEntity {
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "cart")
-    private List<CartEntry> cartEntries = new ArrayList<>();
-
-    public Cart() {
-    }
+    @ElementCollection
+    private Map<Ticket, Integer> orderedTickets = new HashMap<>();
 
     public int ticketsCount() {
-        return cartEntries.stream().mapToInt(cartEntry -> cartEntry.getQuantity()).sum();
+        return orderedTickets.values().stream().mapToInt(i -> i.intValue()).sum();
     }
 
     public float totalPrice() {
-        return cartEntries.stream().map(cartEntry -> cartEntry.getTicket().getPrice() * cartEntry.getQuantity()).reduce(0f, Float::sum);
+        return orderedTickets.entrySet().stream().map(f -> f.getKey().getPrice() * f.getValue()).reduce(0f, Float::sum);
     }
 
     public Cart checkout() {
-        cartEntries = Collections.unmodifiableList(cartEntries);
+        orderedTickets = Collections.unmodifiableMap(orderedTickets);
         return this;
     }
 
     public void clear() {
-        cartEntries = new ArrayList<>();
+        orderedTickets = new HashMap<>();
     }
 
-    public List<CartEntry> getCartEntries() {
-        return cartEntries;
+    public Map<Ticket, Integer> getOrderedTickets() {
+        return orderedTickets;
     }
 
-    public void setCartEntries(List<CartEntry> cartEntries) {
-        this.cartEntries = cartEntries;
+    public void setOrderedTickets(Map<Ticket, Integer> orderedTickets) {
+        this.orderedTickets = orderedTickets;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        cartEntries.forEach(cartEntry -> sb.append("Ticket = " + cartEntry.getTicket() + "amount: " + cartEntry.getQuantity() + "\n"));
+        StringBuilder sb = new StringBuilder(super.toString() + "\n");
+        orderedTickets.entrySet().forEach(e -> sb.append("Ticket = " + e.getKey() + "amount: " + e.getValue() + "\n"));
         return sb.toString();
     }
 }

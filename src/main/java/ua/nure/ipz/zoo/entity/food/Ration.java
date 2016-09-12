@@ -4,25 +4,19 @@ import ua.nure.ipz.zoo.entity.Animal;
 import ua.nure.ipz.zoo.util.DomainEntity;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 public class Ration extends DomainEntity {
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "ration")
-    private List<RationEntry> rationEntries = new ArrayList<>();
+    @ElementCollection
+    private Map<Product, Float> rationEntries = new HashMap<>();
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "provision_id")
-    private Provision provision;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Animal animal;
 
     public Ration() {
@@ -32,11 +26,11 @@ public class Ration extends DomainEntity {
         this.animal = animal;
     }
 
-    public List<RationEntry> getRationEntries() {
+    public Map<Product, Float> getRationEntries() {
         return rationEntries;
     }
 
-    public void setRationEntries(List<RationEntry> rationEntries) {
+    public void setRationEntries(Map<Product, Float> rationEntries) {
         this.rationEntries = rationEntries;
     }
 
@@ -50,16 +44,9 @@ public class Ration extends DomainEntity {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(animal + "\n");
-        rationEntries.forEach(rationEntry -> sb.append("Product = " + rationEntry.getProduct() + ", amount: " + rationEntry.getAmount() + "\n"));
+        StringBuilder sb = new StringBuilder(super.toString() + "\n" + animal + "\n");
+        rationEntries.entrySet().forEach(e -> sb.append("Product = " + e.getKey() + ", amount: " + e.getValue() + "\n"));
         return sb.toString();
     }
 
-    public Provision getProvision() {
-        return provision;
-    }
-
-    public void setProvision(Provision provision) {
-        this.provision = provision;
-    }
 }

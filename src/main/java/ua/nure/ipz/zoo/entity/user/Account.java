@@ -3,12 +3,12 @@ package ua.nure.ipz.zoo.entity.user;
 import ua.nure.ipz.zoo.util.DomainEntity;
 import ua.nure.ipz.zoo.util.Regex;
 
+import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 import java.util.regex.Pattern;
 
-@MappedSuperclass
+@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Account extends DomainEntity {
 

@@ -4,7 +4,7 @@ import ua.nure.ipz.zoo.entity.enums.OrderStatus;
 import ua.nure.ipz.zoo.entity.log.order.OrderLog;
 import ua.nure.ipz.zoo.entity.log.order.OrderLogger;
 import ua.nure.ipz.zoo.entity.ticket.Discount;
-import ua.nure.ipz.zoo.entity.ticket.TicketSaller;
+import ua.nure.ipz.zoo.entity.ticket.TicketSeller;
 import ua.nure.ipz.zoo.entity.user.Account;
 import ua.nure.ipz.zoo.entity.user.Cart;
 import ua.nure.ipz.zoo.util.DomainEntity;
@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Table(name = "Orders")
 public class Order extends DomainEntity {
 
-    @ManyToOne(cascade = CascadeType.PERSIST, targetEntity = TicketSaller.class)
+    @ManyToOne(cascade = CascadeType.PERSIST, targetEntity = TicketSeller.class)
     @JoinColumn(name = "account_id")
     private Account account;
 
@@ -31,7 +31,6 @@ public class Order extends DomainEntity {
 
     @Enumerated
     private OrderStatus status;
-
     @Embedded
     private Discount discount;
     @Embedded
