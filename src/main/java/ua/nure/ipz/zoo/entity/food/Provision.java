@@ -48,7 +48,7 @@ public class Provision extends DomainEntity {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(super.toString() + "\n");
+        StringBuilder sb = new StringBuilder("ID = " + getDomainId() + "\n");
         rations.forEach(r -> sb.append(r + "\n"));
         return sb.toString();
     }

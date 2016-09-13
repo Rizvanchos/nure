@@ -48,9 +48,4 @@ public abstract class DomainEntity implements Serializable {
     public void setDomainId(UUID domainId) {
         this.domainId = domainId;
     }
-
-    @Override
-    public String toString() {
-        return "ID = " + domainId;
-    }
 }

@@ -4,14 +4,14 @@ import ua.nure.ipz.zoo.util.DomainEntity;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 @Entity
 public class Schedule extends DomainEntity {
 
     @ElementCollection
-    private Map<Aviary, String> schedules = new LinkedHashMap<>();
+    private Map<Aviary, String> schedules = new HashMap<>();
 
     public String generateSchedule() {
         StringBuilder sb = new StringBuilder();
@@ -29,6 +29,6 @@ public class Schedule extends DomainEntity {
 
     @Override
     public String toString() {
-        return super.toString() + "\n" + generateSchedule();
+        return "ID = " + getDomainId() + "\n" + generateSchedule();
     }
 }

@@ -63,6 +63,6 @@ public class TicketDiscount extends Discount {
 
     @Override
     public String toString() {
-        return String.format("%s\nTicketType = %s\nBarrier = %s\nCoefficient = %s", super.toString(), type, barrier, coefficient);
+        return String.format("TicketType = %s\nBarrier = %s\nCoefficient = %s", type, barrier, coefficient);
     }
 }

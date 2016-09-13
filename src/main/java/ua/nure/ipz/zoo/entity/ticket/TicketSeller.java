@@ -37,7 +37,7 @@ public class TicketSeller extends Account {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(super.toString() + "Orders:\n");
+        StringBuilder sb = new StringBuilder("ID = " + getDomainId() + "\nOrders:\n");
         orders.forEach(o -> sb.append(o + "\n"));
         return sb.toString();
     }

@@ -42,7 +42,7 @@ public class Cart extends DomainEntity {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(super.toString() + "\n");
+        StringBuilder sb = new StringBuilder("ID = " + getDomainId() + "\n");
         orderedTickets.entrySet().forEach(e -> sb.append("Ticket = " + e.getKey() + "amount: " + e.getValue() + "\n"));
         return sb.toString();
     }

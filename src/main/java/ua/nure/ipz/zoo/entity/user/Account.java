@@ -63,6 +63,6 @@ public abstract class Account extends DomainEntity {
 
     @Override
     public String toString() {
-        return String.format("%s\nName = %s\nEmail = %s\nPassword = %s", super.toString(), name, email, password);
+        return String.format("ID = %s\nName = %s\nEmail = %s\nPassword = %s", getDomainId(), name, email, password);
     }
 }

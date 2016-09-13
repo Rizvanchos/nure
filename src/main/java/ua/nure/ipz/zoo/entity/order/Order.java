@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Table(name = "Orders")
 public class Order extends DomainEntity {
 
-    @ManyToOne(cascade = CascadeType.PERSIST, targetEntity = TicketSeller.class)
+    @ManyToOne(targetEntity = TicketSeller.class)
     @JoinColumn(name = "account_id")
     private Account account;
 
@@ -118,7 +118,7 @@ public class Order extends DomainEntity {
 
     @Override
     public String toString() {
-        return String.format("%s\nCart = %s\nBasic Price = %s\nDiscounted Price = %s\n" + "Contact = %s\nStatus = %s",
-                super.toString(), cart, basicPrice, getTotalPrice(), contact, status);
+        return String.format("ID = %s\nCart = %s\nBasic Price = %s\nDiscounted Price = %s\n" + "Contact = %s\nStatus = %s",
+                getDomainId(), cart, basicPrice, getTotalPrice(), contact, status);
     }
 }

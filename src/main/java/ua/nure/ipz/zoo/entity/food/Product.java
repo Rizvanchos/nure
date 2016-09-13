@@ -36,6 +36,6 @@ public class Product extends DomainEntity {
 
     @Override
     public String toString() {
-        return String.format("%s\nName = %s\nPrice = %s", super.toString(), name, price);
+        return String.format("ID = %s\nName = %s\nPrice = %s", getDomainId(), name, price);
     }
 }

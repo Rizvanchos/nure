@@ -2,7 +2,6 @@ package ua.nure.ipz.zoo.entity;
 
 import ua.nure.ipz.zoo.util.DomainEntity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -10,7 +9,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Animal extends DomainEntity {
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "aviary_id")
     private Aviary aviary;
     private String name;
@@ -50,6 +49,6 @@ public class Animal extends DomainEntity {
 
     @Override
     public String toString() {
-        return String.format("%s\nName = %s\nType = %s", super.toString(), name, type);
+        return String.format("ID = %s\nName = %s\nType = %s", getDomainId(), name, type);
     }
 }

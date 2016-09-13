@@ -59,7 +59,7 @@ public class Aviary extends DomainEntity {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(super.toString() + "\nTemperature = " + temperature + "\nWet = "
+        StringBuilder sb = new StringBuilder("ID = " + getDomainId() + "\nTemperature = " + temperature + "\nWet = "
                 + wet + "\nContact = " + contactFlag + "\n\nAnimals:\n");
         animals.forEach(a -> sb.append("\n" + a + "\n"));
         return sb.toString();

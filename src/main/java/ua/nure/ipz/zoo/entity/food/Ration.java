@@ -44,7 +44,7 @@ public class Ration extends DomainEntity {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(super.toString() + "\n" + animal + "\n");
+        StringBuilder sb = new StringBuilder("ID = " + getDomainId() + "\n" + animal + "\n");
         rationEntries.entrySet().forEach(e -> sb.append("Product = " + e.getKey() + ", amount: " + e.getValue() + "\n"));
         return sb.toString();
     }

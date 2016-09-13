@@ -32,6 +32,6 @@ public class Ticket extends DomainEntity {
 
     @Override
     public String toString() {
-        return String.format("%s\nTicketType = %s\n", super.toString(), getType());
+        return String.format("ID = %s\nTicketType = %s\n", getDomainId(), type);
     }
 }

@@ -1,8 +1,7 @@
 package testapp;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import ua.nure.ipz.zoo.repository.jpa.ZooJPAContext;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -12,18 +11,17 @@ public class Demo {
         try {
             ZooModel model1 = TestModelGenerator.generateData();
 
-            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("entityManager");
-            EntityManager entityManager = entityManagerFactory.createEntityManager();
+            try (ZooJPAContext jpaContext = new ZooJPAContext("ZooCreate")) {
+                ModelSaver saver = new ModelSaver(jpaContext.getEntityManager());
+                saver.save(model1);
+            }
 
-            ModelSaver saver = new ModelSaver(entityManager);
-            saver.save(model1);
+            try (ZooJPAContext jpaContext = new ZooJPAContext("ZooRead")) {
+                ModelRestorer restorer = new ModelRestorer(jpaContext.getEntityManager());
+                ZooModel model2 = restorer.restore();
 
-            entityManager = entityManagerFactory.createEntityManager();
-
-            ModelRestorer restorer = new ModelRestorer(entityManager);
-            ZooModel model2 = restorer.restore();
-
-            compareModels(model1, model2);
+                compareModels(model1, model2);
+            }
         } catch (Exception e) {
             System.out.println(e.getClass().getName());
             System.out.println(e.getMessage());

@@ -1,6 +1,5 @@
 package ua.nure.ipz.zoo.repository.jpa;
 
-import ua.nure.ipz.zoo.entity.ticket.TicketSeller;
 import ua.nure.ipz.zoo.entity.user.Account;
 import ua.nure.ipz.zoo.repository.AccountRepository;
 

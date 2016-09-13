@@ -17,8 +17,6 @@ public class ModelSaver {
 
     public void save(ZooModel zoo) {
 
-        entityManager.getTransaction().begin();
-
         saveCollection(RepositoryFactory.makeProductRepository(entityManager), zoo.getProducts());
         saveCollection(RepositoryFactory.makeTicketRepository(entityManager), zoo.getTickets());
         saveCollection(RepositoryFactory.makeCartRepository(entityManager), zoo.getCarts());
@@ -32,7 +30,6 @@ public class ModelSaver {
         saveCollection(RepositoryFactory.makeProvisionLogRepository(entityManager), zoo.getProvisionLogs());
         saveCollection(RepositoryFactory.makeOrderLogRepository(entityManager), zoo.getOrderLogs());
 
-        entityManager.getTransaction().commit();
     }
 
     private <TRepository extends Repository<TEntity>, TEntity extends DomainEntity> void saveCollection(TRepository repository, List<TEntity> collection) {
