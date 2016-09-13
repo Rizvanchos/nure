@@ -18,10 +18,6 @@ public abstract class BasicRepository<T extends DomainEntity> implements Reposit
         this.clazz = clazz;
     }
 
-    protected EntityManager getEntityManager() {
-        return entityManager;
-    }
-
     @Override
     public long count() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();

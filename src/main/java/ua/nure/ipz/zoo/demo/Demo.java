@@ -1,6 +1,7 @@
-package testapp;
+package ua.nure.ipz.zoo.demo;
 
-import ua.nure.ipz.zoo.repository.jpa.ZooJPAContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -8,20 +9,18 @@ import java.io.PrintStream;
 public class Demo {
 
     public static void main(String[] args) {
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+
+        ModelSaver modelSaver = context.getBean(ModelSaver.class);
+        ModelRestorer modelRestorer = context.getBean(ModelRestorer.class);
+
         try {
-            ZooModel model1 = TestModelGenerator.generateData();
+            ZooModel model1 = ZooModelGenerator.generateData();
+            modelSaver.save(model1);
 
-            try (ZooJPAContext jpaContext = new ZooJPAContext("ZooCreate")) {
-                ModelSaver saver = new ModelSaver(jpaContext.getEntityManager());
-                saver.save(model1);
-            }
-
-            try (ZooJPAContext jpaContext = new ZooJPAContext("ZooRead")) {
-                ModelRestorer restorer = new ModelRestorer(jpaContext.getEntityManager());
-                ZooModel model2 = restorer.restore();
-
-                compareModels(model1, model2);
-            }
+            ZooModel model2 = modelRestorer.restore();
+            compareModels(model1, model2);
         } catch (Exception e) {
             System.out.println(e.getClass().getName());
             System.out.println(e.getMessage());

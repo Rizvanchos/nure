@@ -1,4 +1,4 @@
-package testapp;
+package ua.nure.ipz.zoo.demo;
 
 import java.io.PrintStream;
 import java.util.List;

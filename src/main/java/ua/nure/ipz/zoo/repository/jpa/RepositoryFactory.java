@@ -1,5 +1,6 @@
 package ua.nure.ipz.zoo.repository.jpa;
 
+import org.springframework.stereotype.Component;
 import ua.nure.ipz.zoo.repository.AccountRepository;
 import ua.nure.ipz.zoo.repository.AnimalRepository;
 import ua.nure.ipz.zoo.repository.AviaryRepository;
@@ -15,53 +16,54 @@ import ua.nure.ipz.zoo.repository.TicketRepository;
 
 import javax.persistence.EntityManager;
 
+@Component
 public class RepositoryFactory {
 
-    public static AccountRepository makeAccountRepository(EntityManager entityManager) {
+    public AccountRepository makeAccountRepository(EntityManager entityManager) {
         return new DefaultAccountRepository(entityManager);
     }
 
-    public static AnimalRepository makeAnimalRepository(EntityManager entityManager) {
+    public AnimalRepository makeAnimalRepository(EntityManager entityManager) {
         return new DefaultAnimalRepository(entityManager);
     }
 
-    public static AviaryRepository makeAviaryRepository(EntityManager entityManager) {
+    public AviaryRepository makeAviaryRepository(EntityManager entityManager) {
         return new DefaultAviaryRepository(entityManager);
     }
 
-    public static CartRepository makeCartRepository(EntityManager entityManager) {
+    public CartRepository makeCartRepository(EntityManager entityManager) {
         return new DefaultCartRepository(entityManager);
     }
 
-    public static OrderLogRepository makeOrderLogRepository(EntityManager entityManager) {
+    public OrderLogRepository makeOrderLogRepository(EntityManager entityManager) {
         return new DefaultOrderLogRepository(entityManager);
     }
 
-    public static OrderRepository makeOrderRepository(EntityManager entityManager) {
+    public OrderRepository makeOrderRepository(EntityManager entityManager) {
         return new DefaultOrderRepository(entityManager);
     }
 
-    public static ProductRepository makeProductRepository(EntityManager entityManager) {
+    public ProductRepository makeProductRepository(EntityManager entityManager) {
         return new DefaultProductRepository(entityManager);
     }
 
-    public static ProvisionRepository makeProvisionRepository(EntityManager entityManager) {
+    public ProvisionRepository makeProvisionRepository(EntityManager entityManager) {
         return new DefaultProvisionRepository(entityManager);
     }
 
-    public static ProvisionLogRepository makeProvisionLogRepository(EntityManager entityManager) {
+    public ProvisionLogRepository makeProvisionLogRepository(EntityManager entityManager) {
         return new DefaultProvisionLogRepository(entityManager);
     }
 
-    public static RationRepository makeRationRepository(EntityManager entityManager) {
+    public RationRepository makeRationRepository(EntityManager entityManager) {
         return new DefaultRationRepository(entityManager);
     }
 
-    public static ScheduleRepository makeScheduleRepository(EntityManager entityManager) {
+    public ScheduleRepository makeScheduleRepository(EntityManager entityManager) {
         return new DefaultScheduleRepository(entityManager);
     }
 
-    public static TicketRepository makeTicketRepository(EntityManager entityManager) {
+    public TicketRepository makeTicketRepository(EntityManager entityManager) {
         return new DefaultTicketRepository(entityManager);
     }
 }

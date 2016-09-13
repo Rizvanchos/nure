@@ -1,4 +1,4 @@
-package testapp;
+package ua.nure.ipz.zoo.demo;
 
 import ua.nure.ipz.zoo.entity.Animal;
 import ua.nure.ipz.zoo.entity.Aviary;
@@ -16,7 +16,7 @@ import ua.nure.ipz.zoo.entity.ticket.TicketDiscount;
 import ua.nure.ipz.zoo.entity.ticket.TicketSeller;
 import ua.nure.ipz.zoo.entity.user.Cart;
 
-public class TestModelGenerator {
+public class ZooModelGenerator {
 
     public static ZooModel generateData() {
         ZooModel zoo = new ZooModel();

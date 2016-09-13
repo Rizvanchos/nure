@@ -1,4 +1,4 @@
-package testapp;
+package ua.nure.ipz.zoo.demo;
 
 import ua.nure.ipz.zoo.entity.Animal;
 import ua.nure.ipz.zoo.entity.Aviary;
